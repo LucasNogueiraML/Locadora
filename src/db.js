@@ -1,0 +1,12 @@
+const mongoose = require("mongoose");
+
+async function conect() {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("✅ Conectado ao MongoDB Atlas!");
+  } catch (err) {
+    console.error("❌ Erro ao conectar ao MongoDB:", err.message);
+  }
+}
+
+module.exports = { conect };
