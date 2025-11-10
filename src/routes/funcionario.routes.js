@@ -47,5 +47,28 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ erro: err.message });
   }
 });
+// Login de funcionário
+router.post("/login", async (req, res) => {
+  const { email, senha } = req.body;
+
+  try {
+    // Busca o funcionário pelo e-mail
+    const funcionario = await Funcionario.findOne({ email });
+
+    if (!funcionario) {
+      return res.status(404).json({ erro: "Funcionário não encontrado!" });
+    }
+
+    // Como ainda não temos campo de senha no banco, vamos simular
+    // (poderia comparar com funcionario.senha futuramente)
+    if (senha !== "1234") { // senha temporária
+      return res.status(401).json({ erro: "Senha incorreta!" });
+    }
+
+    return res.status(200).json(funcionario);
+  } catch (err) {
+    return res.status(500).json({ erro: err.message });
+  }
+});
 
 module.exports = router;

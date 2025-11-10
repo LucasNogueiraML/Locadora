@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carros | VrumDB</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 16px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { margin-bottom: 8px; }
+    form { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+    form input { padding:8px; font-size:14px; }
+    form button { padding:8px 12px; }
+    .lists { display:flex; gap:16px; }
+    .card-list { flex:1; border:1px solid #ddd; padding:12px; border-radius:6px; max-height:60vh; overflow:auto; }
+    .car-card { border-bottom:1px solid #eee; padding:8px 0; display:flex; justify-content:space-between; gap:8px; }
+    .car-actions button { margin-left:6px; }
+    .small { font-size:13px; color:#555; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gerenciar Carros</h1>
+
+    <!-- Formulário de cadastro -->
+    <form id="formAddCar">
+      <input type="text" id="modelo" placeholder="Modelo" required>
+      <input type="text" id="marca" placeholder="Marca" required>
+      <input type="number" id="ano" placeholder="Ano" required>
+      <input type="text" id="placa" placeholder="Placa" required>
+      <input type="number" id="preco" placeholder="Valor diária" required>
+      <button type="submit">Adicionar Carro</button>
+    </form>
+
+    <!-- Filtros / botões rápidos -->
+    <div style="margin-bottom:12px;">
+      <button id="btnRefresh">Atualizar lista</button>
+    </div>
+
+    <!-- Listas -->
+    <div class="lists">
+      <div class="card-list" id="listaDisponiveis">
+        <h3>Disponíveis</h3>
+        <div id="disponiveisContainer"></div>
+      </div>
+
+      <div class="card-list" id="listaIndisponiveis">
+        <h3>Indisponíveis</h3>
+        <div id="indisponiveisContainer"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API = "http://localhost:3000/carros";
+
+    // Elements
+    const form = document.getElementById("formAddCar");
+    const dispoContainer = document.getElementById("disponiveisContainer");
+    const indispoContainer = document.getElementById("indisponiveisContainer");
+    const btnRefresh = document.getElementById("btnRefresh");
+
+    // Helper: render one carro card
+    function renderCarCard(car) {
+      const div = document.createElement("div");
+      div.className = "car-card";
+      div.innerHTML = `
+        <div>
+          <strong>${car.modelo} — ${car.marca}</strong>
+          <div class="small">Ano: ${car.ano} • Placa: ${car.placa} • R$ ${car.preco}</div>
+        </div>
+        <div class="car-actions">
+          <button data-action="toggle" data-id="${car._id}">${car.disponivel ? "Alugar" : "Devolver"}</button>
+          <button data-action="delete" data-id="${car._id}">Deletar</button>
+        </div>
+      `;
+      return div;
+    }
+
+    // Buscar e renderizar carros
+    async function fetchAndRender() {
+      try {
+        const res = await fetch(API);
+        const carros = await res.json();
+
+        dispoContainer.innerHTML = "";
+        indispoContainer.innerHTML = "";
+
+        carros.forEach(car => {
+          const card = renderCarCard(car);
+          if (car.disponivel) dispoContainer.appendChild(card);
+          else indispoContainer.appendChild(card);
+        });
+
+      } catch (err) {
+        console.error("Erro ao buscar carros:", err);
+        alert("Erro ao buscar carros. Veja console.");
+      }
+    }
+
+    // Adicionar carro
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const payload = {
+        modelo: document.getElementById("modelo").value,
+        marca: document.getElementById("marca").value,
+        ano: Number(document.getElementById("ano").value),
+        placa: document.getElementById("placa").value,
+        preco: Number(document.getElementById("preco").value),
+        disponivel: true
+      };
+
+      try {
+        const res = await fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error("Falha ao criar carro");
+        form.reset();
+        fetchAndRender();
+      } catch (err) {
+        console.error(err);
+        alert("Erro ao adicionar carro");
+      }
+    });
+
+    // Delegation para ações (alugar/devolver/deletar)
+    document.addEventListener("click", async (ev) => {
+      const btn = ev.target.closest("button[data-action]");
+      if (!btn) return;
+
+      const id = btn.dataset.id;
+      const action = btn.dataset.action;
+
+      if (action === "toggle") {
+        // Buscar carro atual (ou enviar toggle)
+        try {
+          // buscar carro para saber status atual
+          const resGet = await fetch(`${API}`);
+          const list = await resGet.json();
+          const carro = list.find(c => c._id === id);
+          if (!carro) return alert("Carro não encontrado");
+
+          const novoStatus = !carro.disponivel;
+          const res = await fetch(`${API}/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ disponivel: novoStatus })
+          });
+          if (!res.ok) throw new Error("Erro ao atualizar status");
+          fetchAndRender();
+        } catch (err) {
+          console.error(err);
+          alert("Erro ao alterar disponibilidade");
+        }
+      }
+
+      if (action === "delete") {
+        if (!confirm("Deseja realmente excluir este carro?")) return;
+        try {
+          const res = await fetch(`${API}/${id}`, { method: "DELETE" });
+          if (!res.ok) throw new Error("Erro ao deletar");
+          fetchAndRender();
+        } catch (err) {
+          console.error(err);
+          alert("Erro ao deletar carro");
+        }
+      }
+    });
+
+    // Refresh button
+    btnRefresh.addEventListener("click", fetchAndRender);
+
+    // Inicializa
+    fetchAndRender();
+  </script>
+</body>
+</html>

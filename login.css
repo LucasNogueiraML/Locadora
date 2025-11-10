@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+
+/* CABEÇALHOA */
+.header {
+    background-color: #00A859;
+    color: white;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+  }
+  
+  .logo {
+    font-weight: 600;
+    font-size: 24px;
+  }
+  
+  .nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+  
+  .nav a:hover {
+    opacity: 0.8;
+  }
+
+/* === Página de Login === */
+.login-section {
+    padding: 140px 20px 100px;
+    background: #f3f6f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .login-section .form-container {
+    background: #fff;
+    padding: 40px 50px;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+  }
+  
+  .login-section h2 {
+    color: #00A859;
+    margin-bottom: 25px;
+    font-size: 26px;
+    font-weight: 600;
+  }
+  
+  .login-section .form-group {
+    text-align: left;
+    margin-bottom: 18px;
+  }
+  
+  .login-section label {
+    display: block;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .login-section input {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+  }
+  
+  .login-section input:focus {
+    border-color: #00A859;
+    box-shadow: 0 0 0 2px rgba(0, 168, 89, 0.1);
+  }
+  
+  .login-section .btn {
+    width: 100%;
+    background: linear-gradient(135deg, #00A859, #00994d);
+    border: none;
+    color: white;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+  }
+  
+  .login-section .btn:hover {
+    background: linear-gradient(135deg, #00994d, #007a3a);
+  }
+  
+  .login-section .login-link {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .login-section .login-link a {
+    color: #00A859;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .login-section .login-link a:hover {
+    text-decoration: underline;
+  }
+  

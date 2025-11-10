@@ -7,6 +7,7 @@ const funcionarioSchema = new mongoose.Schema({
   telefone: { type: String },
   email: { type: String },
   acesso: { type: Number, default: 1 }, // ex: 1 = comum, 2 = admin
+  senha: { type: String, required: true },
 });
 
 // O nome do model é sempre no singular, e o Mongo cria a coleção no plural automaticamente

@@ -42,4 +42,20 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// Login de cliente
+router.post("/login", async (req, res) => {
+  const { email, senha } = req.body;
+
+  try {
+    const cliente = await Cliente.findOne({ email, senha });
+    if (!cliente) {
+      return res.status(401).json({ erro: "Email ou senha incorretos!" });
+    }
+
+    res.json({ nome: cliente.nome, id: cliente._id });
+  } catch (err) {
+    res.status(500).json({ erro: err.message });
+  }
+});
+
 module.exports = router;
