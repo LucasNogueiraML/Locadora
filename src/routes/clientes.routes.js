@@ -52,7 +52,7 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ erro: "Email ou senha incorretos!" });
     }
 
-    res.json({ nome: cliente.nome, id: cliente._id });
+    res.json({ nome: cliente.nome, id: cliente._id, email: cliente.email });
   } catch (err) {
     res.status(500).json({ erro: err.message });
   }

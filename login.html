@@ -89,7 +89,9 @@
       data = await response.json();
 
       if (response.ok) {
-        alert(`Bem-vindo(a), ${data.nome}!`);
+        alert(`Bem-vindo(a), ${data.nome} com email ${data.email}!`);
+        localStorage.setItem("usuarioLogado", JSON.stringify(data));
+
         window.location.href = "carros.html"; // redireciona cliente
       } else {
         alert(data.erro || "Usuário ou senha incorretos!");

@@ -1,6 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const Carro = require("../models/carro");
+// Buscar carro por ID
+router.get("/:id", async (req, res) => {
+  try {
+    const carro = await Carro.findById(req.params.id);
+    if (!carro) return res.status(404).json({ error: "Carro não encontrado" });
+    res.json(carro);
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao buscar carro por ID" });
+  }
+});
 
 // Listar carros
 router.get("/", async (req, res) => {

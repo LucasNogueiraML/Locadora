@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Locação | DriveNow</title>
+  <link rel="stylesheet" href="locacao.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">VrumDB</h1>
+      <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="carros.html">Carros</a>
+        <a href="cadastro.html">Cadastro</a>
+        <a href="login.html" id="loginLink">Login</a>
+        <a href="#" id="logoutLink" style="display: none;">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Seção de Locação -->
+  <section class="locacao-section">
+    <div class="container">
+      <h2>Finalizar Locação</h2>
+
+      <div class="info-box">
+        <h3>Carro Selecionado</h3>
+        <p><strong>Modelo:</strong> <span id="carroModelo">---</span></p>
+        <p><strong>Valor por dia:</strong> <span id="carroValor">---</span></p>
+      </div>
+
+      <div class="info-box">
+        <h3>Seus Dados</h3>
+        <p><strong>Nome:</strong> <span id="usuarioNome">---</span></p>
+        <p><strong>Email:</strong> <span id="usuarioEmail">---</span></p>
+      </div>
+
+      <form id="formLocacao">
+        <h3>Detalhes da Locação</h3>
+
+        <label for="dataRetirada">Data de Retirada:</label>
+        <input type="date" id="dataRetirada" name="dataRetirada" required>
+
+        <label for="dataDevolucao">Data de Devolução:</label>
+        <input type="date" id="dataDevolucao" name="dataDevolucao" required>
+
+        <button type="submit" class="btn">Confirmar Locação</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <p>&copy; 2025 DriveNow Locadora - Todos os direitos reservados</p>
+  </footer>
+
+  <script src="locacao.js"></script>
+</body>
+</html>

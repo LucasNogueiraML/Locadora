@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carros Disponíveis | DriveNow</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carros Disponíveis | VrumDB</title>
   <link rel="stylesheet" href="carros.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
@@ -16,7 +16,8 @@
         <a href="index.html">Início</a>
         <a href="carros.html" class="active">Carros</a>
         <a href="cadastro.html">Cadastro</a>
-        <a href="login.html">Login</a>
+        <a href="login.html" id="loginLink">Login</a>
+        <a href="#" id="logoutLink" style="display:none;">Sair</a>
       </nav>
     </div>
   </header>
@@ -27,53 +28,72 @@
 
     <div class="carros-grid">
 
-      <div class="car-card">
-        <img src="./images/Chevrolet Onix..webp" alt="Onix">
-        <h3>Chevrolet Onix</h3>
-        <p>Categoria: Hatch</p>
-        <span>R$ 120 / dia</span>
-        <a href="locacao.html" class="btn">Alugar</a>
-      </div>
+      <div class="car-card" 
+     data-id="690dde4e134ecdc1e7eb2dd8" 
+     data-modelo="Onix"
+     data-valor="120">
+  <img src="./images/Chevrolet Onix..webp" alt="Onix">
+  <h3>Chevrolet Onix</h3>
+  <p>Categoria: Hatch</p>
+  <span>R$ 120 / dia</span>
+  <a href="#" class="btn">Alugar</a>
+</div>
 
-      <div class="car-card">
-        <img src="./images/argo.jfif" alt="Fiat Argo">
-        <h3>Fiat Argo</h3>
-        <p>Categoria: Hatch</p>
-        <span>R$ 115 / dia</span>
-        <a href="locacao.html" class="btn">Alugar</a>
-      </div>
+<div class="car-card" 
+     data-id="690df433dba9d5b4151ccdc0" 
+     data-modelo="Fiat Argo"
+     data-valor="115">
+  <img src="./images/argo.jfif" alt="Fiat Argo">
+  <h3>Fiat Argo</h3>
+  <p>Categoria: Hatch</p>
+  <span>R$ 115 / dia</span>
+  <a href="#" class="btn">Alugar</a>
+</div>
 
-      <div class="car-card">
-        <img src="./images/hb20.png" alt="HB20">
-        <h3>Hyundai HB20</h3>
-        <p>Categoria: Hatch</p>
-        <span>R$ 130 / dia</span>
-        <a href="locacao.html" class="btn">Alugar</a>
-      </div>
+<div class="car-card" 
+     data-id="6913b11c742415ab195d33a2" 
+     data-modelo="HB20"
+     data-valor="130">
+  <img src="./images/hb20.png" alt="HB20">
+  <h3>Hyundai HB20</h3>
+  <p>Categoria: Hatch</p>
+  <span>R$ 130 / dia</span>
+  <a href="#" class="btn">Alugar</a>
+</div>
 
-      <div class="car-card">
-        <img src="./images/virtus.jfif.png" alt="Virtus">
-        <h3>Volkswagen Virtus</h3>
-        <p>Categoria: Sedan</p>
-        <span>R$ 160 / dia</span>
-        <a href="locacao.html" class="btn">Alugar</a>
-      </div>
+<div class="car-card" 
+     data-id="690df4c3dba9d5b4151ccdc2" 
+     data-modelo="Virtus"
+     data-valor="160">
+  <img src="./images/virtus.jfif.png" alt="Virtus">
+  <h3>Volkswagen Virtus</h3>
+  <p>Categoria: Sedan</p>
+  <span>R$ 160 / dia</span>
+  <a href="#" class="btn">Alugar</a>
+</div>
 
-      <div class="car-card">
-        <img src="./images/uno.jfif.png" alt="Uno">
-        <h3>Fiat Uno</h3>
-        <p>Categoria: Econômico</p>
-        <span>R$ 100 / dia</span>
-        <a href="locacao.html" class="btn">Alugar</a>
-      </div>
+<div class="car-card" 
+     data-id="690df529dba9d5b4151ccdc4" 
+     data-modelo="Uno"
+     data-valor="100">
+  <img src="./images/uno.jfif.png" alt="Uno">
+  <h3>Fiat Uno</h3>
+  <p>Categoria: Econômico</p>
+  <span>R$ 100 / dia</span>
+  <a href="#" class="btn">Alugar</a>
+</div>
 
-      <div class="car-card">
-        <img src="./images/corolla.png" alt="Corolla">
-        <h3>Toyota Corolla</h3>
-        <p>Categoria: Premium</p>
-        <span>R$ 220 / dia</span>
-        <a href="locacao.html" class="btn">Alugar</a>
-      </div>
+<div class="car-card" 
+     data-id="690ddeea134ecdc1e7eb2ddb" 
+     data-modelo="Corolla"
+     data-valor="220">
+  <img src="./images/corolla.png" alt="Corolla">
+  <h3>Toyota Corolla</h3>
+  <p>Categoria: Premium</p>
+  <span>R$ 220 / dia</span>
+  <a href="#" class="btn">Alugar</a>
+</div>
+
 
     </div>
   </section>
@@ -82,5 +102,7 @@
   <footer class="footer">
     <p>&copy; 2025 DriveNow Locadora - Todos os direitos reservados</p>
   </footer>
+
+<script src="carros.js"></script>
 </body>
 </html>

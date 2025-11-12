@@ -7,6 +7,7 @@ const clienteSchema = new mongoose.Schema({
   email: { type: String },
   endereco: { type: String },
   dataNascimento: { type: Date },
+  senha: {type: String},
   carroAlugado: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: "Carro", // nome do Model do carro
